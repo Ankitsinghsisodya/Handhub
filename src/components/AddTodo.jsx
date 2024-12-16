@@ -1,20 +1,23 @@
 import React from "react";
 import { useState } from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { addToTask } from "../Features/Task/taskSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function AddTodo() {
+  
   const [task, setTask] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+ 
   return (
     <form
       className="mt-2 shadow-md w-[50%] flex justify-between items-center"
       onSubmit={(e) => {
         e.preventDefault();
 
-        dispatch(addToTask(task))
+        dispatch(addToTask(task));
         setTask("");
-
       }}
     >
       <input

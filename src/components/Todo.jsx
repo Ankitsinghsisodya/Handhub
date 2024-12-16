@@ -6,8 +6,10 @@ import {
   deleteTask,
   toggleComplete,
   updateTask,
+  addToTask,
 } from "../Features/Task/taskSlice";
 import { useEffect } from "react";
+import { useCallback } from "react";
 
 function Todo() {
   const Tasks = useSelector((state) => state.Tasks);
@@ -15,6 +17,28 @@ function Todo() {
 
   const [isEditable, setIsEditable] = useState({});
   const [taskTexts, setTaskTexts] = useState({});
+
+  // // Load tasks from local storage when the component mounts
+  useEffect(() => {
+
+    const temp = [];
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks && storedTasks.length > 0) {
+      storedTasks.forEach((task) => {
+
+        dispatch(addToTask(task.text));
+      });
+    }
+ 
+  }, []);
+
+  // // // Save tasks to local storage whenever they change
+  useEffect(() => {
+    if (Tasks && Tasks.Tasks.length > 0) {
+      localStorage.removeItem("tasks");
+      if (Tasks) localStorage.setItem("tasks", JSON.stringify(Tasks?.Tasks));
+    }
+  }, [Tasks]);
 
   useEffect(() => {
     const initialEditableState = {};
@@ -44,6 +68,7 @@ function Todo() {
       [taskId]: newText,
     }));
   };
+
   return (
     <div className="flex flex-col gap-y-2 my-3 w-[50%]">
       {Tasks?.Tasks.map((Task) => (
@@ -63,8 +88,7 @@ function Todo() {
               disabled={!isEditable[Task.id]}
               value={taskTexts[Task.id]}
               className={Task.complete ? "line-through" : ""}
-              onChange={(e) => handleTextChange(Task.id, e.target.value)
-              }
+              onChange={(e) => handleTextChange(Task.id, e.target.value)}
             />
           </div>
           <div className="flex gap-x-2">
@@ -72,7 +96,7 @@ function Todo() {
               className="bg-green-800 rounded-md h-[40px] w-[50px] inline-flex justify-center items-center hover:bg-blue-800 cursor-pointer"
               onClick={() => handleEditClick(Task.id)}
             >
-             { isEditable[Task.id]?"Save":"Edit"}
+              {isEditable[Task.id] ? "Save" : "Edit"}
             </button>
             <button
               className="bg-green-800 rounded-md h-[40px] w-[50px] inline-flex justify-center items-center hover:bg-blue-800 cursor-pointer"

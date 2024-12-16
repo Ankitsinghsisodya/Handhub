@@ -13,7 +13,7 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     addToTask: (state, action) => {
-
+      // console.log(new Date().getSeconds);
       const Task = {
         id: nanoid(),
         text: action.payload,
