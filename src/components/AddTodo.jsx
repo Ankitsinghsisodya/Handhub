@@ -11,10 +11,10 @@ function AddTodo() {
       className="mt-2 shadow-md w-[50%] flex justify-between items-center"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(task);
+
         dispatch(addToTask(task))
         setTask("");
-        consolelog
+
       }}
     >
       <input

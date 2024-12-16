@@ -13,15 +13,19 @@ export const taskSlice = createSlice({
   initialState,
   reducers: {
     addToTask: (state, action) => {
+
       const Task = {
         id: nanoid(),
-        text: action.text,
-        complete: action.payload,
+        text: action.payload,
+        complete: false,
       };
       state.Tasks.push(Task);
+
     },
     deleteTask: (state, action) => {
-      state = state.Tasks.filter((Task) => Task.id !== action.payload);
+
+      console.log("state", state.Tasks);
+      state.Tasks = state.Tasks.filter((Task) => Task.id !== action.payload);
     },
     updateTask: (state, action) => {
       const { id, text, complete } = action.payload;
@@ -36,12 +40,15 @@ export const taskSlice = createSlice({
       );
     },
     toggleComplete: (state, action) => {
+      console.log("state", state);
       const Task = state.Tasks.find((Task) => Task.id == action.payload);
       Task.complete = !Task.complete;
+      console.log("state", state);
     },
   },
 });
 
-export const { addToTask, removeTask, updateTask } = taskSlice.actions;
+export const { addToTask, deleteTask, updateTask, toggleComplete } =
+  taskSlice.actions;
 
 export default taskSlice.reducer;
