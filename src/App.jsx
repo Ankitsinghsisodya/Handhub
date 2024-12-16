@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Currencyconverter from "./components/Currencyconverter";
 import Task from "./components/Task";
 
+
 function App() {
   const [bgcolor, setBgColor] = useState("red");
   return (
@@ -40,6 +41,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+        <Counter/>
       </div>
     </div>
   );

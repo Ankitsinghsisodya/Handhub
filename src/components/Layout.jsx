@@ -7,7 +7,7 @@ function Layout() {
   return (
     <div className="h-screen">
       <Nav />
-      <div className="w-full h-[100%] flex justify-center items-center">
+      <div className="w-full h-[100%] flex justify-center items-center bg-[#333] overflow-hidden">
         <Outlet />
         <Bgcolour />
       </div>
