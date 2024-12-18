@@ -20,16 +20,22 @@ function Todo() {
 
   // // Load tasks from local storage when the component mounts
   useEffect(() => {
-
+    async function pp() {
+      await clean();
+      async function clean() {
+        Tasks.Tasks.map((task) => {
+          dispatch(deleteTask(task.id));
+        });
+      }
+    }
+    pp();
     const temp = [];
     const storedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (storedTasks && storedTasks.length > 0) {
       storedTasks.forEach((task) => {
-
         dispatch(addToTask(task.text));
       });
     }
- 
   }, []);
 
   // // // Save tasks to local storage whenever they change
@@ -38,7 +44,7 @@ function Todo() {
       localStorage.removeItem("tasks");
       if (Tasks) localStorage.setItem("tasks", JSON.stringify(Tasks?.Tasks));
     }
-  }, [Tasks]);
+  }, [Tasks?.Tasks]);
 
   useEffect(() => {
     const initialEditableState = {};

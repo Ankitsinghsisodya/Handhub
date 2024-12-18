@@ -26,6 +26,7 @@ export const taskSlice = createSlice({
 
       console.log("state", state.Tasks);
       state.Tasks = state.Tasks.filter((Task) => Task.id !== action.payload);
+      localStorage.setItem("tasks",JSON.stringify(state.Tasks)); 
     },
     updateTask: (state, action) => {
       const { id, text, complete } = action.payload;

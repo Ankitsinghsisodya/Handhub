@@ -8,10 +8,16 @@ function Nav() {
         <ul className="flex justify-around h-full items-center font-semibold text-xl  w-full gap-x-2 md:gap-x-5">
           <li>
             <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "text-orange-400" : "")}
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/counter"
-              className={({ isActive }) =>
-                (isActive ? "text-orange-400" : "") 
-              }
+              className={({ isActive }) => (isActive ? "text-orange-400" : "")}
             >
               Counter
             </NavLink>

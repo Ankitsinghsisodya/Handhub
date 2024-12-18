@@ -41,7 +41,6 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-        <Counter/>
       </div>
     </div>
   );
